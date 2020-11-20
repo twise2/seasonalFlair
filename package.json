@@ -1,0 +1,19 @@
+{
+  "name": "seasonflair",
+  "version": "1.0.0",
+  "description": "A component to give text headers a seasonal flair",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twise2/seasonalFlair.git"
+  },
+  "author": "Tristan Wise",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twise2/seasonalFlair/issues"
+  },
+  "homepage": "https://github.com/twise2/seasonalFlair#readme"
+}
