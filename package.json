@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/twise2/seasonalFlair/issues"
   },
-  "homepage": "https://github.com/twise2/seasonalFlair#readme"
+  "homepage": "https://github.com/twise2/seasonalFlair#readme",
+  "dependencies": {
+    "twemoji": "^13.0.1"
+  }
 }
