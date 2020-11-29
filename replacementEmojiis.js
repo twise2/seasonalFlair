@@ -1,8 +1,4 @@
-import {
-  isThanksgivingWeek,
-  collapseList,
-  getRandomDateInNextYear
-} from "./utils.js"; //reliance on date prototype update
+import { isThanksgivingWeek, collapseList } from "./utils.js"; //reliance on date prototype update
 
 const winter = [
   //snowflake
@@ -102,24 +98,31 @@ const getEmojiisByMonth = {
   12: [...winter]
 };
 
-const getEmojiisByWeek = {};
+const getEmojiisByDay = (month, day) => {
+  return emojiisByDay[month] ? emojiisByDay[month][day] : [];
+};
 
-export const getEmojiReplacementList = () => {
+const emojiisByDay = {
+  3: {
+    17: [...saintPatricksDay]
+  }
+};
+
+export const getEmojiReplacementList = date => {
   //returns a map of letters to emojis
   let emojiList = [];
-  const date =
-    process.env.NODE_ENV === "development"
-      ? getRandomDateInNextYear()
-      : new Date();
-  console.log("date", date);
   const week = date.getWeekNumber();
   const month = date.getMonth() + 1;
-  emojiList = emojiList.concat(getEmojiisByWeek[week]);
+  const day = date.getDate();
+  const year = date.getYear();
+  console.log("dmy", year, month, day, week);
   emojiList = emojiList.concat(getEmojiisByMonth[month]);
+  emojiList = emojiList.concat(getEmojiisByDay(month, day));
   //thanksgiving can move
   if (isThanksgivingWeek(date)) {
     emojiList = emojiList.concat(thanksgiving);
   }
+
   const cl = collapseList(emojiList.filter(item => !!item));
   return cl;
 };

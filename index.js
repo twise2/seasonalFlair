@@ -1,9 +1,16 @@
 import { getEmojiReplacementList } from "./replacementEmojiis.js";
-import { seededRandom } from "./utils.js";
+import { seededRandom, getRandomDateInNextYear } from "./utils.js";
 
 const emojifyText = text => {
+  const date =
+    process.env.NODE_ENV === "development"
+      ? getRandomDateInNextYear()
+      : new Date();
+  if (process.env.NODE_ENV === "development") {
+    console.log("date", date);
+  }
   //get a list of potential emoji replacements
-  const emojiList = getEmojiReplacementList();
+  const emojiList = getEmojiReplacementList(date);
   if (!emojiList.length) {
     return text;
   }
