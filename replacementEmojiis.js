@@ -1,4 +1,4 @@
-import { isThanksgivingWeek, collapseList } from "./utils.js"; //reliance on date prototype update
+import { nthTargetDayOfMonth, collapseList } from "./utils.js"; //reliance on date prototype update
 
 const winter = [
   //snowflake
@@ -103,31 +103,35 @@ const getEmojiisByMonth = {
   12: [...winter]
 };
 
-const getEmojiisByDay = (month, day) => {
+const getEmojiisByDay = (year, month, day) => {
+  const emojiisByDay = {
+    1: {
+      1: [...newYears]
+    },
+    2: {
+      29: [...leapYear]
+    },
+    3: {
+      17: [...saintPatricksDay]
+    },
+    4: {},
+    5: {},
+    6: {},
+    7: {},
+    8: {},
+    9: {
+      [nthTargetDayOfMonth(year, 9, 1, 1)]: [...thanksgiving]
+    },
+    10: {},
+    11: {
+      [nthTargetDayOfMonth(year, 11, 5, 4)]: [...thanksgiving]
+    },
+    12: {
+      31: [...newYears]
+    }
+  };
+  console.log("getEmojiisByDay", emojiisByDay);
   return emojiisByDay[month] ? emojiisByDay[month][day] : [];
-};
-
-const emojiisByDay = {
-  1: {
-    1: [...newYears]
-  },
-  2: {
-    29: [...leapYear]
-  },
-  3: {
-    17: [...saintPatricksDay]
-  },
-  4: {},
-  5: {},
-  6: {},
-  7: {},
-  8: {},
-  9: {},
-  10: {},
-  11: {},
-  12: {
-    31: [...newYears]
-  }
 };
 
 export const getEmojiReplacementList = date => {
@@ -136,14 +140,11 @@ export const getEmojiReplacementList = date => {
   const week = date.getWeekNumber();
   const month = date.getMonth() + 1;
   const day = date.getDate();
-  const year = date.getYear();
+  const year = date.getFullYear();
   console.log("dmy", year, month, day, week);
   emojiList = emojiList.concat(getEmojiisByMonth[month]);
-  emojiList = emojiList.concat(getEmojiisByDay(month, day));
+  emojiList = emojiList.concat(getEmojiisByDay(year, month, day));
   //thanksgiving can move
-  if (isThanksgivingWeek(date)) {
-    emojiList = emojiList.concat(thanksgiving);
-  }
 
   const cl = collapseList(emojiList.filter(item => !!item));
   return cl;
