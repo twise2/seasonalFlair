@@ -2,90 +2,83 @@ import { isThanksgivingWeek } from "./utils.js"; //reliance on date prototype up
 
 const winter = [
   //snowflake
-  { O: "U+2744" },
-  { o: "U+2744" },
+  { "U+2744": ["O", "o", "a"] },
   //evergreen tree
-  { A: "U+1F332" },
+  { "U+1F332": ["A"] },
   // snowman
-  { B: "U+2603" },
-  { b: "U+2603" }
+  { "U+2603": ["B", "b"] }
 ];
 
 const fall = [
   //fallen leaf
-  { XXX: "U+1F342" }
+  { "U+1F342": [] }
 ];
 
 const sportingEvent = [
   //stadium
-  { XXX: "U+1F3DF" }
+  { "U+1F3DF": [] }
 ];
 
 const newYears = [
   //party popper
-  { XXX: "U+1F389" }
+  { "U+1F389": [] }
 ];
 
 const canadaDay = [
   //maple leaf
-  { XXX: "U+1F341" }
+  { "U+1F341": [] }
 ];
 
 const americanHolidays = [
   //Statue of Liberty
-  { XXX: "U+1F5FD" }
+  { "U+1F5FD": [] }
 ];
 const spring = [
   //seedling
-  { Y: "U+1F331" }
+  { "U+1F331": ["Y"] }
 ];
 
 const thanksgiving = [
   //turkey
-  { a: "U+1F983" }
+  { "U+1F983": ["a"] }
 ];
 
 const pride = [
   //rainbow
-  { r: "U+1F308" }
+  { "U+1F308": ["r"] }
 ];
 const summer = [
   //palm tree
-  { t: "U+1F334" },
-  { T: "U+1F334" },
+  { "U+1F334": ["t", "T"] },
   //Sun
-  { o: "U+2600" },
-  { O: "U+2600" }
+  { "U+2600": ["O", "o", "a"] }
 ];
 
 const saintPatricksDay = [
   //shamrock
-  { XXX: "U+2618" },
+  { "U+2618": [] },
   //four leaf clover
-  { XXX: "U+1F340" }
+  { "U+1F340": [] }
 ];
 
 const graduation = [
   //graduation cap
-  { XXX: "U+1F393" }
+  { "U+1F393": [] }
 ];
 
 const winterHolidays = [
   //christmas tree
-  { A: "U+1F384" }
+  { "U+1F384": ["A"] }
 ];
 
 //TODO think about how to choose between letters
 const haloween = [
   //spider webs
-  { XXX: "U+1F578" },
-  { XXX: "U+1F578" },
+  { "U+1F578": ["O", "o", "a"] },
   //full moon
-  { o: "U+1F315" },
-  { O: "U+1F315" },
+  { "U+1F315": ["O", "o", "a"] },
   //jack-o-lantern
-  { o: "U+1F383" },
-  { O: "U+1F383" }
+  { "U+1F383": ["O", "o", "a"] }
 ];
 
 const getEmojiisByMonth = {
@@ -109,7 +102,7 @@ export const getEmojiReplacementList = () => {
   emojiList = emojiList.concat(getEmojiisByWeek[week]);
   emojiList = emojiList.concat(getEmojiisByMonth[month]);
   //thanksgiving can move
-  if (isThanksgivingWeek()) {
+  if (isThanksgivingWeek(d)) {
     emojiList = emojiList.concat(thanksgiving);
   }
   return emojiList.filter(item => !!item);

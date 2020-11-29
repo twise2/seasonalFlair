@@ -11,6 +11,9 @@ Date.prototype.getWeekNumber = function () {
 
 //Random number generated deterministic by hour of day
 export const seededRandom = () => {
+  if (process.env.NODE_ENV === "development") {
+    return Math.random();
+  }
   //get character code of the current hour to seed the random generator
   // build a number from that string "seed"
   const randomSeed = () => {
