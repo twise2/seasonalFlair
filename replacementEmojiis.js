@@ -1,4 +1,4 @@
-import { isThanksgivingWeek } from "./utils.js"; //reliance on date prototype update
+import { isThanksgivingWeek, collapseList } from "./utils.js"; //reliance on date prototype update
 
 const winter = [
   //snowflake
@@ -68,7 +68,9 @@ const graduation = [
 
 const winterHolidays = [
   //christmas tree
-  { "U+1F384": ["A"] }
+  { "U+1F384": ["A"] },
+  //spider webs
+  { "U+1F578": ["O", "o", "a"] }
 ];
 
 //TODO think about how to choose between letters
@@ -83,7 +85,7 @@ const haloween = [
 
 const getEmojiisByMonth = {
   //winter months
-  10: [...haloween]
+  10: [...haloween, ...winter]
 };
 
 const getEmojiisByWeek = {
@@ -97,13 +99,12 @@ export const getEmojiReplacementList = () => {
   const d = new Date(2020, 10, 25);
   const week = d.getWeekNumber();
   const month = d.getMonth();
-  console.log("week", week);
-  console.log("month", month);
   emojiList = emojiList.concat(getEmojiisByWeek[week]);
   emojiList = emojiList.concat(getEmojiisByMonth[month]);
   //thanksgiving can move
   if (isThanksgivingWeek(d)) {
     emojiList = emojiList.concat(thanksgiving);
   }
-  return emojiList.filter(item => !!item);
+  const cl = collapseList(emojiList).filter(item => !!item);
+  return cl;
 };

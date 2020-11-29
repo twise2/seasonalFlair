@@ -46,3 +46,22 @@ export const isThanksgivingWeek = () => {
   const d = new Date(year, 10, turkyDay);
   return d.getWeekNumber() === today.getWeekNumber();
 };
+
+//take a list of objects and merge matching keys values into single arrays of values
+export const collapseList = list => {
+  let res = [];
+  let seenItems = [];
+  list.forEach(object => {
+    //get all the elements who's key matches
+    if (!seenItems.includes(object)) {
+      const key = Object.keys(object)[0];
+      const items = list.filter(element => Object.keys(element)[0] === key);
+      //mark all items in filter as seen
+      seenItems = seenItems.concat(items);
+      //concat all items with the same key into a single emoji option
+      const collapsedArray = [].concat(...items.map(val => val[key]));
+      res = res.concat({ [key]: collapsedArray });
+    }
+  });
+  return res;
+};

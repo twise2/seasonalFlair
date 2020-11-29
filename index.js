@@ -38,5 +38,7 @@ const emojifyText = text => {
 //TEST
 if (process.env.NODE_ENV === "development") {
   const testString = "Mosaic";
-  console.log(emojifyText(testString));
+  for (let i = 0; i < 30; i++) {
+    console.log(emojifyText(testString));
+  }
 }
