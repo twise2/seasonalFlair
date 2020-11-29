@@ -92,5 +92,5 @@ export const collapseList = list => {
 };
 
 export const getRandomDateInNextYear = () => {
-  return new Date(+new Date() - Math.floor(Math.random() * 100000000));
+  return new Date(+new Date() - Math.floor(Math.random() * 1000000000000));
 };

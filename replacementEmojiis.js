@@ -130,7 +130,6 @@ const getEmojiisByDay = (year, month, day) => {
       31: [...newYears]
     }
   };
-  console.log("getEmojiisByDay", emojiisByDay);
   return emojiisByDay[month] ? emojiisByDay[month][day] : [];
 };
 
@@ -141,7 +140,6 @@ export const getEmojiReplacementList = date => {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   const year = date.getFullYear();
-  console.log("dmy", year, month, day, week);
   emojiList = emojiList.concat(getEmojiisByMonth[month]);
   emojiList = emojiList.concat(getEmojiisByDay(year, month, day));
   //thanksgiving can move
