@@ -38,13 +38,12 @@ export const seededRandom = () => {
   return (t >>> 0) / 4294967296;
 };
 
-export const isThanksgivingWeek = () => {
-  const today = new Date();
+export const isThanksgivingWeek = today => {
   const year = today.getYear();
   const lastOfNov = new Date(year, 10, 30).getDay();
   const turkyDay = (lastOfNov >= 4 ? 34 : 27) - lastOfNov;
-  const d = new Date(year, 10, turkyDay);
-  return d.getWeekNumber() === today.getWeekNumber();
+  const thanksgivingWeek = new Date(year, 10, turkyDay);
+  return thanksgivingWeek.getWeekNumber() === today.getWeekNumber();
 };
 
 //take a list of objects and merge matching keys values into single arrays of values
@@ -64,4 +63,7 @@ export const collapseList = list => {
     }
   });
   return res;
+};
+export const getRandomDateInNextYear = () => {
+  return new Date(+new Date() - Math.floor(Math.random() * 100000000000));
 };

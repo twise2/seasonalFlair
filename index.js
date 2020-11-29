@@ -4,6 +4,9 @@ import { seededRandom } from "./utils.js";
 const emojifyText = text => {
   //get a list of potential emoji replacements
   const emojiList = getEmojiReplacementList();
+  if (!emojiList.length) {
+    return text;
+  }
   //filter out all potential emojis that are not included in letters
   //TODO: replace Math.random with seededRandom
   const randomEmoji = emojiList[Math.floor(seededRandom() * emojiList.length)];

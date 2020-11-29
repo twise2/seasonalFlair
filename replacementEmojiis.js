@@ -1,4 +1,8 @@
-import { isThanksgivingWeek, collapseList } from "./utils.js"; //reliance on date prototype update
+import {
+  isThanksgivingWeek,
+  collapseList,
+  getRandomDateInNextYear
+} from "./utils.js"; //reliance on date prototype update
 
 const winter = [
   //snowflake
@@ -47,6 +51,7 @@ const pride = [
   //rainbow
   { "U+1F308": ["r"] }
 ];
+
 const summer = [
   //palm tree
   { "U+1F334": ["t", "T"] },
@@ -68,9 +73,7 @@ const graduation = [
 
 const winterHolidays = [
   //christmas tree
-  { "U+1F384": ["A"] },
-  //spider webs
-  { "U+1F578": ["O", "o", "a"] }
+  { "U+1F384": ["A"] }
 ];
 
 //TODO think about how to choose between letters
@@ -85,26 +88,38 @@ const haloween = [
 
 const getEmojiisByMonth = {
   //winter months
-  10: [...haloween, ...winter]
+  1: [...winter],
+  2: [...winter],
+  3: [...spring],
+  4: [...spring],
+  5: [...spring],
+  6: [...summer],
+  7: [...summer],
+  8: [...summer],
+  9: [...fall],
+  10: [...haloween, ...fall],
+  11: [...fall],
+  12: [...winter]
 };
 
-const getEmojiisByWeek = {
-  //winter months
-  48: [...winter]
-};
+const getEmojiisByWeek = {};
 
 export const getEmojiReplacementList = () => {
   //returns a map of letters to emojis
   let emojiList = [];
-  const d = new Date(2020, 10, 25);
-  const week = d.getWeekNumber();
-  const month = d.getMonth();
+  const date =
+    process.env.NODE_ENV === "development"
+      ? getRandomDateInNextYear()
+      : new Date();
+  console.log("date", date);
+  const week = date.getWeekNumber();
+  const month = date.getMonth() + 1;
   emojiList = emojiList.concat(getEmojiisByWeek[week]);
   emojiList = emojiList.concat(getEmojiisByMonth[month]);
   //thanksgiving can move
-  if (isThanksgivingWeek(d)) {
+  if (isThanksgivingWeek(date)) {
     emojiList = emojiList.concat(thanksgiving);
   }
-  const cl = collapseList(emojiList).filter(item => !!item);
+  const cl = collapseList(emojiList.filter(item => !!item));
   return cl;
 };
