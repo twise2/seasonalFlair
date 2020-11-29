@@ -4,49 +4,47 @@
 //WEEKS (party on friday, happy on monday, camel on wednesday)
 //prioritize the daily ones
 //
+//
 
-//default variables
-const d = new Date();
-const month = d.getMonth();
-const day = d.getDay();
+//3 types of items
+//1
+//Items that show up after the text based on day/holiday/etc...
+//These will be things like "canada day, 4th of july, and major holidays. These will be on specific days.
 
-const snowflakes = {
-  //snowflakes for Os
-  O: "\u2744",
-  o: "\u2744"
-};
+//2
+//Seasonal letter replacements.
+//These will be things like snowflakes replacing O/o.
+//A maximum of one of these will be used per session and will be given back randomly/based on an ?hourly? seed. (Will change once an hour)
 
-const EmojiisByMonth = {
-  //winter months
-  10: { ...snowflakes },
-  11: { ...snowflakes },
-  12: { ...snowflakes }
-};
+//Add getWeek to the date object to add a little more precision
+//https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
+//
+import { getEmojiReplacementList } from "./replacementEmojiis.js";
+import { seededRandom } from "./utils.js";
 
-//utility functions
-const randomChance = chance => {
-  const rand = Math.random();
-  return rand > chance;
-};
-
-const getCharacterToUse = letter => {
-  const emojiToUse = EmojiisByMonth[month][letter];
-  const chance = letter === " " ? 0.02 : 0.5;
-  if (emojiToUse && randomChance(chance)) {
-    return emojiToUse;
+const emojifyText = text => {
+  //get a list of potential emoji replacements
+  const emojiList = getEmojiReplacementList();
+  //filter out all potential emojis that are not included in letters
+  //TODO: replace Math.random with seededRandom
+  const randomEmoji = emojiList[Math.floor(Math.random() * emojiList.length)];
+  const letterToReplace = Object.keys(randomEmoji)[0];
+  //get the emoji value to replace the letter with
+  const replacementValue = String.fromCodePoint(
+    randomEmoji[letterToReplace].replace("U+", "0x")
+  );
+  if (text.includes(letterToReplace)) {
+    return text.replace(
+      letterToReplace,
+      //replace to make unicode string match code point
+      replacementValue
+    );
   }
-  return null;
+  return text + " " + replacementValue;
 };
 
 //main function to convert text
-const convertText = text => {
-  let convertedText = [];
-  for (let i = 0; i < text.length; i++) {
-    const letter = text[i];
-    convertedText.push(getCharacterToUse(letter) || letter);
-  }
-  return convertedText.join("");
-};
 
-const testString = "test O o fpancpancpemninb kacpacmsdnrop vnapcnape";
-console.log(convertText(testString));
+//TEST
+const testString = "Mosaic";
+console.log(emojifyText(testString));

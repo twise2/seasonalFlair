@@ -18,5 +18,6 @@
   "homepage": "https://github.com/twise2/seasonalFlair#readme",
   "dependencies": {
     "twemoji": "^13.0.1"
-  }
+  },
+  "type": "module"
 }
