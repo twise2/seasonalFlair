@@ -19,6 +19,11 @@ const sportingEvent = [
   { "U+1F3DF": [] }
 ];
 
+const leapYear = [
+  //fast forward button
+  { "U+23E9": [] }
+];
+
 const newYears = [
   //party popper
   { "U+1F389": [] }
@@ -103,8 +108,25 @@ const getEmojiisByDay = (month, day) => {
 };
 
 const emojiisByDay = {
+  1: {
+    1: [...newYears]
+  },
+  2: {
+    29: [...leapYear]
+  },
   3: {
     17: [...saintPatricksDay]
+  },
+  4: {},
+  5: {},
+  6: {},
+  7: {},
+  8: {},
+  9: {},
+  10: {},
+  11: {},
+  12: {
+    31: [...newYears]
   }
 };
 
