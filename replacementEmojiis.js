@@ -1,5 +1,17 @@
 import { nthTargetDayOfMonth, collapseList } from "./utils.js"; //reliance on date prototype update
 
+const aries = [{ "U+2648": [] }];
+const taurus = [{ "U+2649": [] }];
+const gemini = [{ "U+264A": [] }];
+const cancer = [{ "U+264B": [] }];
+const leo = [{ "U+264C": [] }];
+const virgo = [{ "U+264D": [] }];
+const libra = [{ "U+264E": [] }];
+const scorpius = [{ "U+264F": [] }];
+const sagittarius = [{ "U+2650": [] }];
+const capricorn = [{ "U+2651": [] }];
+const aquarius = [{ "U+2652": [] }];
+const pisces = [{ "U+2653": [] }];
 const winter = [
   //snowflake
   { "U+2744": ["O", "o", "a"] },
@@ -38,6 +50,12 @@ const americanHolidays = [
   //Statue of Liberty
   { "U+1F5FD": [] }
 ];
+
+const civilRights = [
+  //raised fist
+  { "U+270A": [] }
+];
+
 const spring = [
   //seedling
   { "U+1F331": ["Y"] }
@@ -106,31 +124,51 @@ const getEmojiisByMonth = {
 const getEmojiisByDay = (year, month, day) => {
   const emojiisByDay = {
     1: {
-      1: [...newYears]
+      1: [...newYears], //new years
+      20: [], //	Aquarius
+      [nthTargetDayOfMonth(year, 1, 2, 3)]: [...civilRights] //MLK day
     },
     2: {
-      29: [...leapYear]
+      19: [], //Pisces
+      29: [...leapYear] //leap year
     },
     3: {
-      17: [...saintPatricksDay]
+      17: [...saintPatricksDay], //saint patricks day
+      20: [...aries, ...spring] //spring equinox, Aries
     },
-    4: {},
-    5: {},
-    6: {},
-    7: {},
-    8: {},
+    4: {
+      19: [...taurus] //taurus
+    },
+    5: {
+      20: [...gemini] //gemini
+    },
+    6: {
+      20: [...summer, ...cancer] //summer solstice, Cancer
+    },
+    7: {
+      4: [...americanHolidays], //american independence day
+      22: [...leo] //Leo
+    },
+    8: {
+      22: [...virgo] //virgo
+    },
     9: {
-      [nthTargetDayOfMonth(year, 9, 1, 1)]: [...thanksgiving]
+      [nthTargetDayOfMonth(year, 9, 1, 1)]: [...americanHolidays], //labor day
+      22: [...fall, ...libra] //autumn equinox, Libra
     },
-    10: {},
+    10: {
+      22: [...scorpius] //Scorpio
+    },
     11: {
-      [nthTargetDayOfMonth(year, 11, 5, 4)]: [...thanksgiving]
+      21: [...sagittarius], //sagittarius
+      [nthTargetDayOfMonth(year, 11, 5, 4)]: [...thanksgiving] //thanksgiving
     },
     12: {
-      31: [...newYears]
+      21: [...winter, ...capricorn], //winter solstice, Capricorn
+      31: [...newYears] //new years
     }
   };
-  return emojiisByDay[month] ? emojiisByDay[month][day] : [];
+  return emojiisByDay[month][day] || [];
 };
 
 export const getEmojiReplacementList = date => {
