@@ -1,5 +1,6 @@
 import { nthTargetDayOfMonth, collapseList } from "./utils.js"; //reliance on date prototype update
 
+//Astrological signs
 const aries = [{ "U+2648": [] }];
 const taurus = [{ "U+2649": [] }];
 const gemini = [{ "U+264A": [] }];
@@ -12,6 +13,7 @@ const sagittarius = [{ "U+2650": [] }];
 const capricorn = [{ "U+2651": [] }];
 const aquarius = [{ "U+2652": [] }];
 const pisces = [{ "U+2653": [] }];
+
 const winter = [
   //snowflake
   { "U+2744": ["O", "o", "a"] },
@@ -21,6 +23,24 @@ const winter = [
   { "U+2603": ["B", "b"] }
 ];
 
+const mothers = [
+  { "U+2640": [] }, //female sign
+  //TODO test this
+  { "U+1F469, U+200D, U+1F466": [] }, //family man and boy
+  { "U+1F469, U+200D, U+1F467": [] } //family man and girl
+];
+const fathers = [
+  { "U+2642": [] }, //male sign
+  //TODO test this
+  { "U+1F468, U+200D, U+1F466": [] }, //family man and boy
+  { "U+1F468, U+200D, U+1F467": [] } //family man and girl
+];
+const beerHolidays = [
+  //beer mug
+  { "U+1F37A": [] },
+  //beer mugs
+  { "U+1F37B": [] }
+];
 const fall = [
   //fallen leaf
   { "U+1F342": [] }
@@ -48,7 +68,9 @@ const canadaDay = [
 
 const americanHolidays = [
   //Statue of Liberty
-  { "U+1F5FD": [] }
+  { "U+1F5FD": [] },
+  //Eagle
+  { "U+1F985	": [] }
 ];
 
 const civilRights = [
@@ -140,10 +162,12 @@ const getEmojiisByDay = (year, month, day) => {
       19: [...taurus] //taurus
     },
     5: {
+      [nthTargetDayOfMonth(year, 5, 1, 2)]: [...mothers], //mothers day
       20: [...gemini] //gemini
     },
     6: {
-      20: [...summer, ...cancer] //summer solstice, Cancer
+      20: [...summer, ...cancer], //summer solstice, Cancer
+      [nthTargetDayOfMonth(year, 6, 1, 3)]: [...fathers] //fathers day
     },
     7: {
       4: [...americanHolidays], //american independence day
@@ -157,6 +181,7 @@ const getEmojiisByDay = (year, month, day) => {
       22: [...fall, ...libra] //autumn equinox, Libra
     },
     10: {
+      [nthTargetDayOfMonth(year, 10, 1, 1)]: [...beerHolidays], //octoberfest
       22: [...scorpius] //Scorpio
     },
     11: {
