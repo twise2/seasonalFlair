@@ -20,111 +20,114 @@ const winter = [
   //evergreen tree
   { "U+1F332": ["A"] },
   // snowman
-  { "U+2603": ["B", "b"] }
+  { "U+2603": ["B", "b"] },
+];
+
+const valentines = [
+  { "U+1F49D": ["O", "U"] },
+  { "U+1F498": ["O", "U"] },
+  { "U+1F48C	": ["O", "U"] },
 ];
 
 const mothers = [
   { "U+2640": [] }, //female sign
   //TODO test this
   { "U+1F469, U+200D, U+1F466": [] }, //family man and boy
-  { "U+1F469, U+200D, U+1F467": [] } //family man and girl
+  { "U+1F469, U+200D, U+1F467": [] }, //family man and girl
 ];
 const fathers = [
   { "U+2642": [] }, //male sign
   //TODO test this
   { "U+1F468, U+200D, U+1F466": [] }, //family man and boy
-  { "U+1F468, U+200D, U+1F467": [] } //family man and girl
+  { "U+1F468, U+200D, U+1F467": [] }, //family man and girl
 ];
 const beerHolidays = [
   //beer mug
   { "U+1F37A": [] },
   //beer mugs
-  { "U+1F37B": [] }
+  { "U+1F37B": [] },
 ];
 const fall = [
   //fallen leaf
-  { "U+1F342": [] }
+  { "U+1F342": [] },
 ];
 
 const sportingEvent = [
   //stadium
-  { "U+1F3DF": [] }
+  { "U+1F3DF": [] },
 ];
 
 const leapYear = [
   //fast forward button
-  { "U+23E9": [] }
+  { "U+23E9": [] },
 ];
 
 const newYears = [
   //party popper
-  { "U+1F389": [] }
+  { "U+1F389": [] },
 ];
 
 const canadaDay = [
   //maple leaf
-  { "U+1F341": [] }
+  { "U+1F341": [] },
 ];
 
 const americanHolidays = [
   //Statue of Liberty
   { "U+1F5FD": [] },
   //Eagle
-  { "U+1F985	": [] }
+  { "U+1F985	": [] },
 ];
 
 const civilRights = [
   //raised fist
-  { "U+270A": [] }
+  { "U+270A": [] },
 ];
 
 const spring = [
   //seedling
-  { "U+1F331": ["Y"] }
+  { "U+1F331": ["Y"] },
 ];
 
 const thanksgiving = [
   //turkey
-  { "U+1F983": ["a"] }
+  { "U+1F983": ["a"] },
 ];
 
 const pride = [
   //rainbow
-  { "U+1F308": ["r"] }
+  { "U+1F308": ["r"] },
 ];
 
 const summer = [
   //palm tree
   { "U+1F334": ["t", "T"] },
   //Sun
-  { "U+2600": ["O", "o", "a"] }
+  { "U+2600": ["O", "o", "a"] },
 ];
 
 const saintPatricksDay = [
   //shamrock
   { "U+2618": [] },
   //four leaf clover
-  { "U+1F340": [] }
+  { "U+1F340": [] },
 ];
 
 const graduation = [
   //graduation cap
-  { "U+1F393": [] }
+  { "U+1F393": [] },
 ];
 
 const winterHolidays = [
   //christmas tree
-  { "U+1F384": ["A"] }
+  { "U+1F384": ["A"] },
 ];
 
 //TODO think about how to choose between letters
 const haloween = [
-  //spider webs
-  { "U+1F578": ["O", "o", "a"] },
-  //full moon
-  { "U+1F315": ["O", "o", "a"] },
-  //jack-o-lantern
-  { "U+1F383": ["O", "o", "a"] }
+  { "U+1F578": ["O", "o", "a"] }, //spider webs
+  { "U+1F315": ["O", "o", "a"] }, //full moon
+  { "U+1F383": ["O", "o", "a"] }, //jack-o-lantern
 ];
 
 const getEmojiisByMonth = {
@@ -140,7 +143,7 @@ const getEmojiisByMonth = {
   9: [...fall],
   10: [...haloween, ...fall],
   11: [...fall],
-  12: [...winter]
+  12: [...winter],
 };
 
 const getEmojiisByDay = (year, month, day) => {
@@ -148,50 +151,51 @@ const getEmojiisByDay = (year, month, day) => {
     1: {
       1: [...newYears], //new years
       20: [], //	Aquarius
-      [nthTargetDayOfMonth(year, 1, 2, 3)]: [...civilRights] //MLK day
+      [nthTargetDayOfMonth(year, 1, 2, 3)]: [...civilRights], //MLK day
     },
     2: {
+      14: [...valentines],
       19: [], //Pisces
-      29: [...leapYear] //leap year
+      29: [...leapYear], //leap year
     },
     3: {
       17: [...saintPatricksDay], //saint patricks day
-      20: [...aries, ...spring] //spring equinox, Aries
+      20: [...aries, ...spring], //spring equinox, Aries
     },
     4: {
-      19: [...taurus] //taurus
+      19: [...taurus], //taurus
     },
     5: {
       [nthTargetDayOfMonth(year, 5, 1, 2)]: [...mothers], //mothers day
-      20: [...gemini] //gemini
+      20: [...gemini], //gemini
     },
     6: {
       20: [...summer, ...cancer], //summer solstice, Cancer
-      [nthTargetDayOfMonth(year, 6, 1, 3)]: [...fathers] //fathers day
+      [nthTargetDayOfMonth(year, 6, 1, 3)]: [...fathers], //fathers day
     },
     7: {
       4: [...americanHolidays], //american independence day
-      22: [...leo] //Leo
+      22: [...leo], //Leo
     },
     8: {
-      22: [...virgo] //virgo
+      22: [...virgo], //virgo
     },
     9: {
       [nthTargetDayOfMonth(year, 9, 1, 1)]: [...americanHolidays], //labor day
-      22: [...fall, ...libra] //autumn equinox, Libra
+      22: [...fall, ...libra], //autumn equinox, Libra
     },
     10: {
       [nthTargetDayOfMonth(year, 10, 1, 1)]: [...beerHolidays], //octoberfest
-      22: [...scorpius] //Scorpio
+      22: [...scorpius], //Scorpio
     },
     11: {
       21: [...sagittarius], //sagittarius
-      [nthTargetDayOfMonth(year, 11, 5, 4)]: [...thanksgiving] //thanksgiving
+      [nthTargetDayOfMonth(year, 11, 5, 4)]: [...thanksgiving], //thanksgiving
     },
     12: {
       21: [...winter, ...capricorn], //winter solstice, Capricorn
-      31: [...newYears] //new years
-    }
+      31: [...newYears], //new years
+    },
   };
   return emojiisByDay[month][day] || [];
 };

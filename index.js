@@ -19,9 +19,10 @@ const emojifyText = text => {
   const randomEmoji = emojiList[Math.floor(seededRandom() * emojiList.length)];
   //get the emoji value to replace the letter with
   const emojiUnicode = Object.keys(randomEmoji)[0];
-  const replacementValue = String.fromCodePoint(
-    emojiUnicode.replace("U+", "0x")
-  );
+  let replacementValue = emojiUnicode
+    .split(",")
+    .map(codePoint => String.fromCodePoint(codePoint.replace("U+", "0x")))
+    .join("");
   //get the letters in it and concat a null for chance to push letter onto the end
   const potentialLettersToReplace = randomEmoji[emojiUnicode]
     .filter(letter => text.includes(letter))
@@ -36,7 +37,7 @@ const emojifyText = text => {
       return text.replace(
         letterToReplace,
         //replace to make unicode string match code point
-        replacementValue
+        replacementValue,
       );
     }
   }
@@ -48,7 +49,7 @@ const emojifyText = text => {
 //TEST
 if (process.env.NODE_ENV === "development") {
   const testString = "Mosaic";
-  for (let i = 0; i < 30; i++) {
+  for (let i = 0; i < 3000; i++) {
     console.log(emojifyText(testString));
   }
 }
