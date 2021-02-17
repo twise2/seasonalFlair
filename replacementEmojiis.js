@@ -23,9 +23,28 @@ const winter = [
   { "U+2603": ["B", "b"] },
 ];
 
+const serviceWorkers = [
+  //construction worker
+  { "U+1F477": ["O", "o"] },
+  //police officer
+  { "U+1F46E": ["O", "o"] },
+  //firefighter
+  { "U+1F468, U+200D, U+1F692": [] },
+];
+
+const importantDocuments = [
+  //memo
+  { "U+1F4DD": [] },
+  //scroll
+  { "U+1F4DC": [] },
+];
+
 const valentines = [
+  //heart with riboon
   { "U+1F49D": ["O", "U"] },
+  //heart with arrow
   { "U+1F498": ["O", "U"] },
+  //love letter
   { "U+1F48C	": ["O", "U"] },
 ];
 
@@ -77,6 +96,7 @@ const americanHolidays = [
   { "U+1F5FD": [] },
   //Eagle
   { "U+1F985	": [] },
+  ...importantDocuments,
 ];
 
 const civilRights = [
@@ -86,7 +106,7 @@ const civilRights = [
 
 const spring = [
   //seedling
-  { "U+1F331": ["Y"] },
+  { "U+1F331": ["t", "T", "I", "i", "l", "L", "Y"] },
 ];
 
 const thanksgiving = [
@@ -101,7 +121,7 @@ const pride = [
 
 const summer = [
   //palm tree
-  { "U+1F334": ["t", "T"] },
+  { "U+1F334": ["t", "T", "I", "i", "l", "L", "Y"] },
   //Sun
   { "U+2600": ["O", "o", "a"] },
 ];
@@ -133,11 +153,11 @@ const haloween = [
 const getEmojiisByMonth = {
   //winter months
   1: [...winter],
-  2: [...winter],
+  2: [...winter, ...civilRights],
   3: [...spring],
   4: [...spring],
   5: [...spring],
-  6: [...summer],
+  6: [...summer, ...pride],
   7: [...summer],
   8: [...summer],
   9: [...fall],
@@ -166,6 +186,7 @@ const getEmojiisByDay = (year, month, day) => {
       19: [...taurus], //taurus
     },
     5: {
+      1: [...importantDocuments],
       [nthTargetDayOfMonth(year, 5, 1, 2)]: [...mothers], //mothers day
       20: [...gemini], //gemini
     },
@@ -181,7 +202,8 @@ const getEmojiisByDay = (year, month, day) => {
       22: [...virgo], //virgo
     },
     9: {
-      [nthTargetDayOfMonth(year, 9, 1, 1)]: [...americanHolidays], //labor day
+      [nthTargetDayOfMonth(year, 9, 1, 1)]: [...serviceWorkers], //labor day
+      17: [...americanHolidays, ...serviceWorkers],
       22: [...fall, ...libra], //autumn equinox, Libra
     },
     10: {

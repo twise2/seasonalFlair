@@ -2,10 +2,12 @@ import { getEmojiReplacementList } from "./replacementEmojiis.js";
 import { seededRandom, getRandomDateInNextYear } from "./utils.js";
 
 const emojifyText = text => {
+  //const date = new Date(1995, 11, 17)
   const date =
     process.env.NODE_ENV === "development"
       ? getRandomDateInNextYear()
       : new Date();
+
   if (process.env.NODE_ENV === "development") {
     console.log("date", date);
   }
