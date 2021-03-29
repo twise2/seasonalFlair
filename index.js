@@ -11,6 +11,12 @@ const emojifyText = text => {
   if (process.env.NODE_ENV === "development") {
     console.log("date", date);
   }
+
+  //APRIL FOOLS OVERRIDE
+  if (date.getMonth() === 3 && date.getDate() === 1) {
+    return text.split("").reverse().join("");
+  }
+
   //get a list of potential emoji replacements
   const emojiList = getEmojiReplacementList(date);
   if (!emojiList.length) {
