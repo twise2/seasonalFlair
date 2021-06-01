@@ -1,4 +1,8 @@
-import { nthTargetDayOfMonth, collapseList } from "./utils.js"; //reliance on date prototype update
+import {
+  lastTargetDayOfMonth,
+  nthTargetDayOfMonth,
+  collapseList,
+} from "./utils.js"; //reliance on date prototype update
 
 //Astrological signs
 const aries = [{ "U+2648": [] }];
@@ -171,7 +175,7 @@ const getEmojiisByDay = (year, month, day) => {
     1: {
       1: [...newYears], //new years
       20: [], //	Aquarius
-      [nthTargetDayOfMonth(year, 1, 2, 3)]: [...civilRights], //MLK day
+      [nthTargetDayOfMonth(year, 1, 1, 3)]: [...civilRights], //MLK day
     },
     2: {
       14: [...valentines],
@@ -187,12 +191,13 @@ const getEmojiisByDay = (year, month, day) => {
     },
     5: {
       1: [...importantDocuments],
-      [nthTargetDayOfMonth(year, 5, 1, 2)]: [...mothers], //mothers day
+      [nthTargetDayOfMonth(year, 5, 0, 2)]: [...mothers], //mothers day
       20: [...gemini], //gemini
+      [lastTargetDayOfMonth(year, 5, 1)]: [...americanHolidays], //memorial day
     },
     6: {
       20: [...summer, ...cancer], //summer solstice, Cancer
-      [nthTargetDayOfMonth(year, 6, 1, 3)]: [...fathers], //fathers day
+      [nthTargetDayOfMonth(year, 6, 0, 3)]: [...fathers], //fathers day
     },
     7: {
       4: [...americanHolidays], //american independence day
@@ -202,17 +207,17 @@ const getEmojiisByDay = (year, month, day) => {
       22: [...virgo], //virgo
     },
     9: {
-      [nthTargetDayOfMonth(year, 9, 1, 1)]: [...serviceWorkers], //labor day
+      [nthTargetDayOfMonth(year, 9, 0, 1)]: [...serviceWorkers], //labor day
       17: [...americanHolidays, ...serviceWorkers],
       22: [...fall, ...libra], //autumn equinox, Libra
     },
     10: {
-      [nthTargetDayOfMonth(year, 10, 1, 1)]: [...beerHolidays], //octoberfest
+      [nthTargetDayOfMonth(year, 10, 0, 1)]: [...beerHolidays], //octoberfest
       22: [...scorpius], //Scorpio
     },
     11: {
       21: [...sagittarius], //sagittarius
-      [nthTargetDayOfMonth(year, 11, 5, 4)]: [...thanksgiving], //thanksgiving
+      [nthTargetDayOfMonth(year, 11, 4, 4)]: [...thanksgiving], //thanksgiving
     },
     12: {
       21: [...winter, ...capricorn], //winter solstice, Capricorn

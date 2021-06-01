@@ -1,12 +1,30 @@
 //add get week function to date object
 Date.prototype.getWeekNumber = function () {
   var d = new Date(
-    Date.UTC(this.getFullYear(), this.getMonth(), this.getDate())
+    Date.UTC(this.getFullYear(), this.getMonth(), this.getDate()),
   );
   var dayNum = d.getUTCDay() || 7;
   d.setUTCDate(d.getUTCDate() + 4 - dayNum);
   var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
   return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+};
+
+const numDaysInMonth = (month, year) => {
+  const daysInMonth = {
+    1: 31,
+    2: (year % 100 === 0 ? year % 400 === 0 : year % 4 === 0) ? 29 : 28,
+    3: 31,
+    4: 30,
+    5: 31,
+    6: 30,
+    7: 31,
+    8: 31,
+    9: 30,
+    10: 31,
+    11: 31,
+    12: 31,
+  };
+  return daysInMonth[month];
 };
 
 //Random number generated deterministic by hour of day
@@ -43,31 +61,31 @@ export const seededRandom = () => {
   return (t >>> 0) / 4294967296;
 };
 
+export const lastTargetDayOfMonth = (year, month, targetDay) => {
+  const lastDayOfMonth = new Date(
+    year,
+    month - 1,
+    numDaysInMonth(month, year),
+  ).getDay();
+
+  const dateDiff =
+    lastDayOfMonth >= targetDay
+      ? targetDay - lastDayOfMonth
+      : 7 - (lastDayOfMonth + targetDay);
+  return numDaysInMonth(month, year) - dateDiff;
+};
+
 export const nthTargetDayOfMonth = (year, month, targetDay, N) => {
-  const lastDayOfMonth = {
-    1: 31,
-    2: (year % 100 === 0 ? year % 400 === 0 : year % 4 === 0) ? 29 : 28,
-    3: 31,
-    4: 30,
-    5: 31,
-    6: 30,
-    7: 31,
-    8: 31,
-    9: 30,
-    10: 31,
-    11: 31,
-    12: 31
-  };
   const firstOfMonth = new Date(year, month - 1, 1);
   const firstDayOfMonth = firstOfMonth.getDay();
-  const firstTargetDayOfMonth =
-    firstDayOfMonth === targetDay
-      ? 1
-      : firstDayOfMonth < targetDay
+
+  const daysToFirstTargetDay =
+    firstDayOfMonth <= targetDay
       ? targetDay - firstDayOfMonth
       : 7 - firstDayOfMonth + targetDay;
-  let NthTargetDayOfMonth = firstTargetDayOfMonth + 7 * (N - 1);
-  return NthTargetDayOfMonth < lastDayOfMonth[month]
+
+  let NthTargetDayOfMonth = daysToFirstTargetDay + 7 * (N - 1);
+  return NthTargetDayOfMonth < numDaysInMonth(month, year)
     ? NthTargetDayOfMonth
     : null;
 };
@@ -94,3 +112,6 @@ export const collapseList = list => {
 export const getRandomDateInNextYear = () => {
   return new Date(+new Date() - Math.floor(Math.random() * 1000000000000));
 };
+
+console.log(lastTargetDayOfMonth(2021, 5, 1) === 31);
+console.log(nthTargetDayOfMonth(2021, 11, 5, 4) === 25);
